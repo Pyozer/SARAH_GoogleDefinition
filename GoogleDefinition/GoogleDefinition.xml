@@ -1,0 +1,47 @@
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="ruleGoogleDefinition" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+	<rule id="ruleGoogleDefinition" scope="public">
+		<example>Jarvis tu peux me définir le mot perpetuelle</example>
+		<tag>out.action=new Object(); </tag>
+
+		<item>Jarvis</item>
+    	
+    	<item repeat="0-1">
+    		<one-of>
+    			<item>donne moi</item>
+    			<item>tu peux</item>
+    			<item>peux tu</item>
+    			<item>tu sais</item>
+    			<item>sais tu</item>
+    		</one-of>
+    	</item>
+		<item repeat="0-1">
+    		<one-of>
+    			<item>la définition</item>
+    			<item>me définir</item>
+    			<item>me définir le mot</item>
+    			<item>la signification</item>
+    			<item>me dire ce que signifie</item>
+    			<item>définit le mot</item>
+    			<item>cherche le mot</item>
+    			<item>chercher le mot</item>
+    			<item>recherche le mot</item>
+    			<item>rechercher le mot</item>
+    		</one-of>
+    	</item>
+		
+		<ruleref special="GARBAGE" />
+
+		<item repeat="0-1">
+			<one-of>
+				<item>via</item>
+				<item>sur</item>
+				<item>par</item>
+				<item>grace a</item>
+			</one-of>
+
+			<item>google</item>
+		</item>
+		
+		<tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/GoogleDefinition";</tag>
+	</rule>
+</grammar>

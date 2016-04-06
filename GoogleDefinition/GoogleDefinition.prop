@@ -1,0 +1,9 @@
+{
+	"modules" : { 
+		"GoogleDefinition"  : {
+			"description": "Permet de récupérer la définition d'un mot via Google",
+			"auteur": "Jean-Charles Moussé",
+			"version": "1.0"
+		}
+	}
+}
