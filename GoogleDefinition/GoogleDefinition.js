@@ -69,7 +69,7 @@ function decodeScribe(search, callback) {
 		return callback();
 	}
 
-	search = match[2].replace('le mot', '').replace('de', '').replace(/(via|par|grace)/i, '').replace(/google/i, '').trim();
+	search = match[2].replace('le mot', '').replace('du mot', '').replace('de', '').replace(/(via|par|grace)/i, '').replace(/google/i, '').trim();
 	return defgoogle(search, callback);
 }
 
