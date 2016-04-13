@@ -48,8 +48,8 @@ function checkScribe(event, action, callback) {
 			decodeScribe(SARAH.context.scribe.lastPartial, callback);
 		} else {
 			SARAH.context.scribe.activePlugin('Aucun (GoogleDefinition)');
-			ScribeSpeak("Désolé je n'ai pas compris. Merci de réessayer.", true);
-			return callback();
+			//ScribeSpeak("Désolé je n'ai pas compris. Merci de réessayer.", true);
+			return callback({ 'tts': "Désolé je n'ai pas compris. Merci de réessayer." });
 		}
 		
 	} else {
@@ -65,8 +65,8 @@ function decodeScribe(search, callback) {
 	var match = search.match(rgxp);
 	if (!match || match.length <= 1){
 		SARAH.context.scribe.activePlugin('Aucun (GoogleDefinition)');
-		ScribeSpeak("Désolé je n'ai pas compris.", true);
-		return callback();
+		//ScribeSpeak("Désolé je n'ai pas compris.", true);
+		return callback({ 'tts': "Désolé je n'ai pas compris." });
 	}
 
 	search = match[2].replace('le mot', '').replace('du mot', '').replace('de', '').replace(/(via|par|grace)/i, '').replace(/google/i, '').trim();
@@ -86,8 +86,8 @@ function defgoogle(search, callback) {
 	if(typeof file_content[search] != 'undefined' && file_content[search] != "") {
 		var infos = file_content[search];
 		console.log("Informations: " + infos);
-		ScribeSpeak(infos);
-		callback();
+		//ScribeSpeak(infos);
+		callback({ 'tts': infos });
 		return;
 
 	} else {
@@ -106,8 +106,8 @@ function defgoogle(search, callback) {
 		request({ 'uri': url, 'headers': options }, function(error, response, html) {
 
 	    	if (error || response.statusCode != 200) {
-				ScribeSpeak("La requête vers Google a échoué. Erreur " + response.statusCode);
-				callback();
+				//ScribeSpeak("La requête vers Google a échoué. Erreur " + response.statusCode);
+				callback({ 'tts': "La requête vers Google a échoué. Erreur " + response.statusCode });
 				return;
 		    }
 	        var $ = cheerio.load(html);
@@ -120,8 +120,8 @@ function defgoogle(search, callback) {
 
 	        if(definition == "") {
 	        	console.log("Impossible de récupérer les informations sur Google");
-	        	ScribeSpeak("Désolé, je n'ai pas réussi à récupérer d'informations", true);
-	        	callback();
+	        	//ScribeSpeak("Désolé, je n'ai pas réussi à récupérer d'informations", true);
+	        	callback({ 'tts': "Désolé, je n'ai pas réussi à récupérer d'informations" });
 	        } else {
 	        	file_content[search] = definition;
 	        	chaine = JSON.stringify(file_content, null, '\t');
@@ -130,8 +130,8 @@ function defgoogle(search, callback) {
 				});
 
 	        	console.log("Informations: " + definition);
-	        	ScribeSpeak(definition);
-	        	callback();
+	        	//ScribeSpeak(definition);
+	        	callback({ 'tts': definition });
 	        }
 		    return;
 	    });
